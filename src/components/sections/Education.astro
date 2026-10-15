@@ -1,0 +1,21 @@
+---
+import { profile } from '../../data/profile';
+import Section from '../Section.astro';
+---
+
+<Section id="educacion" title="Educación">
+  <ul class="space-y-10">
+    {
+      profile.education.map((ed) => (
+        <li>
+          <p class="font-mono text-[0.8125rem] text-muted">{ed.status}</p>
+          <h3 class="mt-2 text-xl font-semibold tracking-[-0.01em]">{ed.title}</h3>
+          <p class="mt-1 text-muted">{ed.institution}</p>
+          {ed.note && (
+            <p class="mt-3 max-w-[60ch] border-l-2 border-accent-base pl-4 text-[0.9375rem]">{ed.note}</p>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</Section>

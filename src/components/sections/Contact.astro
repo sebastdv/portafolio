@@ -1,0 +1,90 @@
+---
+import { profile } from '../../data/profile';
+import Section from '../Section.astro';
+import Icon from '../Icon.astro';
+
+const c = profile.contact;
+const channels = [
+  { label: 'WhatsApp', value: c.phone, href: c.whatsappHref, icon: 'whatsapp', external: true },
+  { label: 'Teléfono', value: c.phone, href: c.phoneHref, icon: 'phone', external: false },
+  { label: 'GitHub', value: c.github.label, href: c.github.href, icon: 'github', external: true },
+  { label: 'LinkedIn', value: c.linkedin.label, href: c.linkedin.href, icon: 'linkedin', external: true },
+] as const;
+---
+
+<Section id="contacto" title="Contacto">
+  <div class="grid gap-12 xl:grid-cols-9 xl:gap-8">
+    <div class="xl:col-span-5">
+      <p class="text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">{profile.contactCta.title}</p>
+      <p class="mt-4 max-w-[52ch] text-lg leading-relaxed text-muted">{profile.contactCta.body}</p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href={`mailto:${c.email}`} class="btn btn-primary">
+          <Icon name="mail" size={18} />
+          Escribir un correo
+        </a>
+        <button type="button" class="copy-email btn btn-ghost" data-email={c.email}>
+          <Icon name="copy" size={18} class="copy-icon" />
+          <Icon name="check" size={18} class="check-icon hidden" />
+          <span class="copy-label">Copiar correo</span>
+        </button>
+        <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
+      </div>
+      <p class="mt-4 font-mono text-sm text-muted">{c.email}</p>
+    </div>
+
+    <ul class="divide-y divide-line border-y border-line xl:col-span-4">
+      {
+        channels.map((ch) => (
+          <li>
+            <a
+              href={ch.href}
+              class="group flex items-center gap-4 py-4 transition-colors"
+              {...(ch.external ? { target: '_blank', rel: 'noopener' } : {})}
+            >
+              <span class="text-muted transition-colors group-hover:text-accent">
+                <Icon name={ch.icon} />
+              </span>
+              <span class="w-24 shrink-0 text-[0.9375rem]">{ch.label}</span>
+              <span class="min-w-0 truncate font-mono text-sm text-muted transition-colors group-hover:text-fg">
+                {ch.value}
+              </span>
+              {ch.external && <span class="sr-only">(se abre en otra pestaña)</span>}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.copy-email').forEach((btn) => {
+    const label = btn.querySelector('.copy-label')!;
+    const copyIcon = btn.querySelector('.copy-icon')!;
+    const checkIcon = btn.querySelector('.check-icon')!;
+    const status = btn.parentElement?.querySelector('[data-copy-status]');
+    let timer: number | undefined;
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.email ?? '');
+        label.textContent = 'Correo copiado';
+        if (status) status.textContent = 'Correo copiado al portapapeles';
+      } catch {
+        label.textContent = 'No se pudo copiar';
+        if (status) status.textContent = 'No se pudo copiar el correo. Selecciónalo y cópialo a mano.';
+        return;
+      }
+      copyIcon.classList.add('hidden');
+      checkIcon.classList.remove('hidden');
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        label.textContent = 'Copiar correo';
+        copyIcon.classList.remove('hidden');
+        checkIcon.classList.add('hidden');
+        if (status) status.textContent = '';
+      }, 2200);
+    });
+  });
+</script>

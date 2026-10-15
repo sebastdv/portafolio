@@ -1,0 +1,10 @@
+---
+import { profile } from '../../data/profile';
+import Section from '../Section.astro';
+---
+
+<Section id="sobre-mi" title="Sobre mí">
+  <div class="max-w-[64ch] space-y-5 text-lg leading-relaxed">
+    {profile.about.map((p, i) => <p class:list={[i > 0 && 'text-muted']}>{p}</p>)}
+  </div>
+</Section>

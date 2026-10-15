@@ -1,0 +1,60 @@
+---
+import Icon from './Icon.astro';
+---
+
+<button
+  type="button"
+  class="theme-toggle icon-link hover:bg-surface-2"
+  aria-label="Cambiar a modo claro"
+  title="Cambiar tema"
+>
+  <Icon name="sun" class="theme-icon-sun" />
+  <Icon name="moon" class="theme-icon-moon" />
+</button>
+
+<style is:global>
+  /* En oscuro se ofrece el sol (pasar a claro); en claro, la luna. */
+  [data-theme='dark'] .theme-toggle .theme-icon-moon,
+  [data-theme='light'] .theme-toggle .theme-icon-sun {
+    display: none;
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+
+  function label(theme: string) {
+    return theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro';
+  }
+
+  function sync() {
+    const theme = root.getAttribute('data-theme') ?? 'dark';
+    document.querySelectorAll<HTMLButtonElement>('.theme-toggle').forEach((btn) => {
+      btn.setAttribute('aria-label', label(theme));
+    });
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.theme-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try {
+        localStorage.setItem('theme', next);
+      } catch {}
+      sync();
+    });
+  });
+
+  // Si el usuario nunca eligió, seguir los cambios del sistema.
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    let stored: string | null = null;
+    try {
+      stored = localStorage.getItem('theme');
+    } catch {}
+    if (stored) return;
+    root.setAttribute('data-theme', e.matches ? 'light' : 'dark');
+    sync();
+  });
+
+  sync();
+</script>

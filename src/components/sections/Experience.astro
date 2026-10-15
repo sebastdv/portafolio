@@ -1,0 +1,55 @@
+---
+import { profile } from '../../data/profile';
+import Section from '../Section.astro';
+import TagList from '../TagList.astro';
+---
+
+<Section id="experiencia" title="Experiencia">
+  <ol class="relative space-y-14 border-l border-line pl-6 sm:pl-8">
+    {
+      profile.experience.map((role) => (
+        <li class="relative">
+          <span
+            class="absolute top-[0.55rem] -left-[calc(1.5rem+4.5px)] size-2 rounded-full border border-accent bg-bg sm:-left-[calc(2rem+4.5px)]"
+            aria-hidden="true"
+          />
+          <p class="font-mono text-[0.8125rem] text-muted">
+            <time datetime={role.startISO}>{role.start}</time>
+            <span aria-hidden="true"> – </span>
+            <span class="sr-only"> a </span>
+            {role.endISO ? <time datetime={role.endISO}>{role.end}</time> : <span>{role.end}</span>}
+          </p>
+          <h3 class="mt-2 text-xl font-semibold tracking-[-0.01em]">{role.title}</h3>
+          <p class="mt-1 text-muted">
+            <span class="text-fg">{role.company}</span>
+            {role.companyNote && <span>. {role.companyNote}</span>}
+          </p>
+
+          {role.products && (
+            <ul class="mt-8 grid gap-3 sm:grid-cols-2" aria-label={`Productos en ${role.company}`}>
+              {role.products.map((product) => (
+                <li
+                  class:list={[
+                    'flex flex-col rounded-lg border border-line bg-surface p-5 sm:p-6',
+                    product.wide && 'sm:col-span-2',
+                  ]}
+                >
+                  <h4 class="text-base font-semibold">{product.title}</h4>
+                  <p class:list={['mt-2 text-[0.9375rem] leading-relaxed text-muted', product.wide && 'max-w-[68ch]']}>
+                    {product.description}
+                  </p>
+                  {(product.usage || product.stack.length > 0) && (
+                    <div class="mt-auto flex flex-col items-start gap-3 pt-5">
+                      {product.usage && <p class="font-mono text-xs text-accent">{product.usage}</p>}
+                      <TagList items={product.stack} label="Stack" />
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</Section>

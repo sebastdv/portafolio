@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/sections/Hero.astro';
+import About from '../components/sections/About.astro';
+import Experience from '../components/sections/Experience.astro';
+import Citara from '../components/sections/Citara.astro';
+import AiWorkflow from '../components/sections/AiWorkflow.astro';
+import Skills from '../components/sections/Skills.astro';
+import Education from '../components/sections/Education.astro';
+import Contact from '../components/sections/Contact.astro';
+import Footer from '../components/sections/Footer.astro';
+---
+
+<Base>
+  <Nav />
+  <main id="contenido" tabindex="-1" class="outline-none">
+    <Hero />
+    <About />
+    <Experience />
+    <Citara />
+    <AiWorkflow />
+    <Skills />
+    <Education />
+    <Contact />
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,23 @@
+---
+interface Props {
+  items: Array<string | { name: string; note?: string }>;
+  label?: string;
+  class?: string;
+}
+
+const { items, label, class: className } = Astro.props;
+const normalized = items.map((i) => (typeof i === 'string' ? { name: i } : i));
+---
+
+{
+  normalized.length > 0 && (
+    <ul class:list={['flex flex-wrap gap-1.5', className]} aria-label={label}>
+      {normalized.map((item) => (
+        <li class="tag">
+          {item.name}
+          {item.note && <span class="tag-note">({item.note})</span>}
+        </li>
+      ))}
+    </ul>
+  )
+}
