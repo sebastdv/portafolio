@@ -257,6 +257,20 @@ export const profile = {
       repo: { label: 'github.com/sebastdv/nitido', href: 'https://github.com/sebastdv/nitido' },
     },
     {
+      name: 'fuentes',
+      summary:
+        'Búsqueda con IA sobre tus propios documentos (PDF, Markdown, páginas web): cada respuesta cita la frase exacta de donde sale y la resalta en su fuente.',
+      status: 'Proyecto personal, listo para publicar',
+      highlights: [
+        'Búsqueda híbrida en PostgreSQL: pgvector más texto completo en español, fusionados con Reciprocal Rank Fusion.',
+        'Citas nativas de Claude a nivel de oración, transmitidas en vivo con Server-Sent Events.',
+        'Embeddings multilingües que corren en el equipo: los documentos se indexan sin salir del computador.',
+        'Evaluación con 25 preguntas: la búsqueda híbrida acierta en el top 3 el 88 % de las veces, contra 76 % y 84 % de cada búsqueda sola.',
+      ],
+      stack: ['TypeScript', 'Hono', 'PostgreSQL', 'pgvector', 'Claude API', 'React', 'Vitest'],
+      repo: { label: 'github.com/sebastdv/fuentes', href: 'https://github.com/sebastdv/fuentes' },
+    },
+    {
       name: 'bitácora',
       summary:
         'Herramienta local que junta los commits de todos tus repositorios y arma el resumen de tu semana, listo para pegar en la daily o en un reporte.',
