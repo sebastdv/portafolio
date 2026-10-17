@@ -54,6 +54,19 @@ export interface WorkflowItem {
   body: string;
 }
 
+export interface PersonalProject {
+  name: string;
+  /** Una frase: qué es y para quién. */
+  summary: string;
+  status: string;
+  /** Lo que hace y cómo está construido, en frases cortas. */
+  highlights: string[];
+  stack: string[];
+  repo: Link;
+  /** Enlace a la versión publicada, cuando exista. */
+  demo?: Link;
+}
+
 export interface ArchitectureNode {
   id: string;
   title: string;
@@ -118,8 +131,7 @@ export const profile = {
           description:
             'Motor de flujos adaptable, con traspaso a un agente humano, formularios integrados y bandeja de chats.',
           usage: 'En uso por 2 empresas cliente',
-          // Pendiente: agrega aquí el stack de este producto.
-          stack: [],
+          stack: ['PHP', 'Laravel', 'PostgreSQL', 'Redis'],
         },
         {
           title: 'Auditoría con IA',
@@ -211,6 +223,41 @@ export const profile = {
       ] satisfies ArchitectureNode[],
     },
   },
+
+  // `as` deja disponible el campo opcional `demo` aunque ningún proyecto lo use todavía.
+  projects: (
+    [
+    {
+      name: 'corto',
+      summary:
+        'Acortador de enlaces con código QR y estadísticas privadas de quién abre cada enlace, sin cuentas y sin guardar IPs.',
+      status: 'Proyecto personal, listo para publicar',
+      highlights: [
+        'Estadísticas por día, país, dispositivo, navegador y sitio de origen, en hora de Colombia.',
+        'Visitantes únicos con un hash diario: cuenta personas sin guardar su IP.',
+        'La redirección responde antes de registrar la visita, así nadie espera a la base de datos.',
+        'API JSON con validación, límite de creación por hora y un token de administración que solo se guarda como hash.',
+        '51 pruebas automatizadas contra PostgreSQL real en memoria (PGlite).',
+      ],
+      stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Tailwind CSS', 'Vitest'],
+      repo: { label: 'github.com/sebastdv/corto', href: 'https://github.com/sebastdv/corto' },
+    },
+    {
+      name: 'lockline',
+      summary:
+        'Herramienta de línea de comandos que revisa migraciones de PostgreSQL antes de producción: dice qué tabla bloquea cada sentencia y propone la alternativa segura.',
+      status: 'Proyecto personal, versión inicial',
+      highlights: [
+        'Lee el SQL con el parser oficial de PostgreSQL y explica el lock de cada sentencia.',
+        '21 reglas para patrones peligrosos, como índices sin CONCURRENTLY o columnas que reescriben la tabla.',
+        'Cada lock que afirma está verificado contra PostgreSQL 14, 15, 16 y 17 reales.',
+        'Salida para personas o en JSON, configuración por proyecto y supresiones con motivo.',
+      ],
+      stack: ['Rust', 'PostgreSQL', 'Docker', 'GitHub Actions'],
+      repo: { label: 'github.com/sebastdv/lockline', href: 'https://github.com/sebastdv/lockline' },
+    },
+    ] satisfies PersonalProject[]
+  ) as PersonalProject[],
 
   aiWorkflow: {
     intro:
@@ -365,7 +412,7 @@ export const profile = {
   nav: [
     { label: 'Sobre mí', href: '#sobre-mi' },
     { label: 'Experiencia', href: '#experiencia' },
-    { label: 'Proyecto', href: '#citara' },
+    { label: 'Proyectos', href: '#citara' },
     { label: 'IA', href: '#ia' },
     { label: 'Habilidades', href: '#habilidades' },
     { label: 'Educación', href: '#educacion' },

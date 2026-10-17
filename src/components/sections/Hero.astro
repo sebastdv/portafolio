@@ -1,6 +1,11 @@
 ---
 import { profile } from '../../data/profile';
+import fs from 'node:fs';
+import path from 'node:path';
 import Icon from '../Icon.astro';
+
+// Si ya pusiste el PDF en public/, se descarga; si no, el botón abre la versión imprimible (/cv).
+const hasPdf = fs.existsSync(path.join(process.cwd(), 'public', profile.cv));
 
 const status = [
   { key: 'ubicación', value: profile.location },
@@ -32,10 +37,19 @@ const status = [
 
       <div class="mt-10 flex flex-wrap items-center gap-3">
         <a href="#citara" class="btn btn-primary">Ver proyectos</a>
-        <a href={profile.cv} class="btn btn-ghost" download>
-          <Icon name="download" size={18} />
-          Descargar CV
-        </a>
+        {
+          hasPdf ? (
+            <a href={profile.cv} class="btn btn-ghost" download>
+              <Icon name="download" size={18} />
+              Descargar CV
+            </a>
+          ) : (
+            <a href="/cv" class="btn btn-ghost">
+              <Icon name="download" size={18} />
+              Ver CV
+            </a>
+          )
+        }
         <span class="mx-1 hidden h-6 w-px bg-line sm:block" aria-hidden="true"></span>
         <a href={profile.contact.github.href} class="icon-link" rel="me noopener" target="_blank">
           <Icon name="github" />

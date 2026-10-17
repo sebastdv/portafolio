@@ -1,0 +1,47 @@
+---
+import { profile } from '../../data/profile';
+import Section from '../Section.astro';
+import TagList from '../TagList.astro';
+import Icon from '../Icon.astro';
+---
+
+<Section id="proyectos" title="Más proyectos" lead="Proyectos personales, con su código abierto en GitHub.">
+  <ul class="space-y-16">
+    {
+      profile.projects.map((project) => (
+        <li>
+          <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <h3 class="font-mono text-2xl font-semibold tracking-[-0.02em]">{project.name}</h3>
+            <p class="text-sm text-muted">{project.status}</p>
+          </div>
+          <p class="mt-4 max-w-[62ch] text-lg leading-relaxed">{project.summary}</p>
+          <ul class="mt-6 max-w-[68ch] space-y-3 text-[0.9375rem] leading-relaxed text-muted">
+            {project.highlights.map((h) => (
+              <li class="flex gap-3">
+                <span class="mt-[0.6rem] h-px w-3 shrink-0 bg-accent" aria-hidden="true" />
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <TagList items={project.stack} label={`Stack de ${project.name}`} />
+          </div>
+          <p class="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-[0.9375rem]">
+            <a href={project.repo.href} class="link inline-flex items-center gap-1.5" target="_blank" rel="noopener">
+              {project.repo.label}
+              <Icon name="external" size={15} />
+              <span class="sr-only">(se abre en otra pestaña)</span>
+            </a>
+            {project.demo && (
+              <a href={project.demo.href} class="link inline-flex items-center gap-1.5" target="_blank" rel="noopener">
+                {project.demo.label}
+                <Icon name="external" size={15} />
+                <span class="sr-only">(se abre en otra pestaña)</span>
+              </a>
+            )}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

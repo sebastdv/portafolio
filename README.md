@@ -4,13 +4,15 @@ Sitio estático de una sola página hecho con Astro 7, TypeScript y Tailwind CSS
 
 ## Editar el contenido
 
-Todo el texto vive en [`src/data/profile.ts`](src/data/profile.ts): perfil, experiencia, citara, IA, habilidades, educación, contacto y SEO. Los componentes solo leen ese archivo.
+Todo el texto vive en [`src/data/profile.ts`](src/data/profile.ts): perfil, experiencia, citara, otros proyectos (`projects`), IA, habilidades, educación, contacto y SEO. Los componentes y la hoja de vida (`/cv`) solo leen ese archivo.
+
+Para agregar la demo publicada de un proyecto, ponle `demo: { label, href }` en `projects`.
 
 Archivos que agregas tú en `public/`:
 
 | Archivo | Para qué |
 | --- | --- |
-| `public/CV_Sebastian_Ardila.pdf` | Botón "Descargar CV" |
+| `public/CV_Sebastian_Ardila.pdf` | Botón "Descargar CV". Mientras no exista, el botón dice "Ver CV" y abre `/cv`, una versión imprimible generada de `profile.ts`: ábrela y usa "Guardar como PDF" para crear este archivo. |
 | `public/citara/demo.gif` | Captura o GIF de citara. Si usas otro nombre o formato, cambia `featured.media.src` en `profile.ts`. Mientras no exista, se muestra un espacio marcado. |
 
 La URL pública está en `astro.config.mjs` (`site`). Cámbiala si usas otro dominio: la usan la URL canónica, Open Graph, `sitemap.xml` y `robots.txt`.
@@ -32,8 +34,8 @@ src/
 ├─ data/profile.ts            contenido
 ├─ layouts/Base.astro         head, SEO, tema, aparición al hacer scroll
 ├─ components/                Nav, ThemeToggle, Section, TagList, Icon, ArchitectureDiagram
-│  └─ sections/               Hero, About, Experience, Citara, AiWorkflow, Skills, Education, Contact, Footer
-├─ pages/                     index, sitemap.xml, robots.txt
+│  └─ sections/               Hero, About, Experience, Citara, Projects, AiWorkflow, Skills, Education, Contact, Footer
+├─ pages/                     index, cv (hoja de vida imprimible), sitemap.xml, robots.txt
 └─ styles/global.css          tokens de color, fuentes y Tailwind
 public/                       fuentes Geist (autoalojadas), favicon, og.png
 ```
