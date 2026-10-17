@@ -257,6 +257,20 @@ export const profile = {
       repo: { label: 'github.com/sebastdv/nitido', href: 'https://github.com/sebastdv/nitido' },
     },
     {
+      name: 'bitácora',
+      summary:
+        'Herramienta local que junta los commits de todos tus repositorios y arma el resumen de tu semana, listo para pegar en la daily o en un reporte.',
+      status: 'Proyecto personal, listo para publicar',
+      highlights: [
+        'Servidor Node sin frameworks que ejecuta git en cada repositorio y solo responde en localhost.',
+        'Línea de tiempo por día y hora, con un color por proyecto.',
+        'Resumen en Markdown por proyecto o por día, con o sin prefijos de Conventional Commits.',
+        '30 pruebas automatizadas, incluidas lecturas de repositorios git reales.',
+      ],
+      stack: ['Node.js', 'React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vitest'],
+      repo: { label: 'github.com/sebastdv/bitacora', href: 'https://github.com/sebastdv/bitacora' },
+    },
+    {
       name: 'lockline',
       summary:
         'Herramienta de línea de comandos que revisa migraciones de PostgreSQL antes de producción: dice qué tabla bloquea cada sentencia y propone la alternativa segura.',
