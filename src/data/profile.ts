@@ -243,6 +243,20 @@ export const profile = {
       repo: { label: 'github.com/sebastdv/corto', href: 'https://github.com/sebastdv/corto' },
     },
     {
+      name: 'nitido',
+      summary:
+        'Herramienta web para formatear, validar y comparar JSON que funciona por completo en el navegador: los datos nunca se envían a un servidor.',
+      status: 'Proyecto personal, listo para publicar',
+      highlights: [
+        'Parser propio que explica cada error en español, con línea, columna y cómo arreglarlo.',
+        'Conserva el valor exacto de los números grandes, que JSON.parse redondea.',
+        'Comparación por rutas ($.cliente.ciudad) más vista línea a línea; el orden de las claves no cuenta como cambio.',
+        '34 pruebas automatizadas del parser, el formateo y la comparación.',
+      ],
+      stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vitest'],
+      repo: { label: 'github.com/sebastdv/nitido', href: 'https://github.com/sebastdv/nitido' },
+    },
+    {
       name: 'lockline',
       summary:
         'Herramienta de línea de comandos que revisa migraciones de PostgreSQL antes de producción: dice qué tabla bloquea cada sentencia y propone la alternativa segura.',
