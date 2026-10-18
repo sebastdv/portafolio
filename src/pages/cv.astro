@@ -5,6 +5,17 @@ import { profile } from '../data/profile';
 
 const { contact } = profile;
 const featured = profile.featured;
+// En la hoja de vida van solo los proyectos elegidos; el resto se enlaza al portafolio.
+const cvProjects = profile.cvProjects
+  .map((name) => profile.projects.find((p) => p.name === name))
+  .filter((p) => p !== undefined);
+const otherProjects = profile.projects.filter((p) => !profile.cvProjects.includes(p.name)).map((p) => p.name);
+const site = new URL(Astro.site ?? 'https://sebastdv.vercel.app');
+const host = (href: string) => new URL(href).host;
+// Tecnologías que la frase no nombra ya: evita repetir "Azure AI Document Intelligence".
+const extraStack = (stack: string[], text: string) => stack.filter((t) => !text.includes(t));
+/** En la hoja de vida, solo las primeras tecnologías de cada proyecto. */
+const CV_STACK_MAX = 7;
 const title = `CV · ${profile.name}`;
 const canonical = new URL('/cv', Astro.site).href;
 ---
@@ -28,9 +39,11 @@ const canonical = new URL('/cv', Astro.site).href;
     <main class="sheet">
       <header>
         <h1>{profile.name}</h1>
-        <p class="headline">{profile.headline}</p>
+        <div class="row">
+          <p class="headline">{profile.headline}</p>
+          <p class="dates">{profile.location.split(',')[0]} · {profile.availability}</p>
+        </div>
         <p class="contact">
-          <span>{profile.location}</span>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
           <a href={contact.phoneHref}>{contact.phone}</a>
           <a href={contact.github.href}>{contact.github.label}</a>
@@ -40,7 +53,7 @@ const canonical = new URL('/cv', Astro.site).href;
 
       <section>
         <h2>Perfil</h2>
-        {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+        <p>{profile.cvAbout}</p>
       </section>
 
       <section>
@@ -62,7 +75,9 @@ const canonical = new URL('/cv', Astro.site).href;
                     <li>
                       <strong>{product.title}.</strong> {product.description}
                       {product.usage && <span class="muted"> {product.usage}.</span>}
-                      {product.stack.length > 0 && <span class="muted"> ({product.stack.join(', ')})</span>}
+                      {extraStack(product.stack, product.description).length > 0 && (
+                        <span class="muted"> ({extraStack(product.stack, product.description).join(', ')})</span>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -79,20 +94,34 @@ const canonical = new URL('/cv', Astro.site).href;
             <h3>{featured.name}</h3>
             <p class="dates">{featured.repo.label}</p>
           </div>
-          <p>{featured.summary}</p>
-          <p class="muted">{featured.stack.join(', ')}</p>
+          <p>
+            {featured.summary} <span class="muted">{featured.stack.slice(0, CV_STACK_MAX).join(', ')}.</span>
+          </p>
         </article>
         {
-          profile.projects.map((project) => (
+          cvProjects.map((project) => (
             <article class="role">
               <div class="row">
                 <h3>{project.name}</h3>
-                <p class="dates">{project.repo.label}</p>
+                {project.demo ? (
+                  <a class="dates" href={project.demo.href}>{host(project.demo.href)}</a>
+                ) : (
+                  <a class="dates" href={project.repo.href}>{project.repo.label}</a>
+                )}
               </div>
-              <p>{project.summary}</p>
-              <p class="muted">{project.stack.join(', ')}</p>
+              <p>
+                {project.summary} <span class="muted">{project.stack.slice(0, CV_STACK_MAX).join(', ')}.</span>
+              </p>
             </article>
           ))
+        }
+        {
+          otherProjects.length > 0 && (
+            <p class="more">
+              Más proyectos ({new Intl.ListFormat('es').format(otherProjects)}) en{' '}
+              <a href={site.href}>{site.host}</a>.
+            </p>
+          )
         }
       </section>
 
@@ -279,6 +308,13 @@ const canonical = new URL('/cv', Astro.site).href;
   .skills dd {
     margin: 0;
   }
+  .more {
+    margin-top: 8px;
+  }
+  .more a,
+  .row a.dates {
+    color: inherit;
+  }
   @media (max-width: 640px) {
     .sheet {
       padding: 24px 18px;
@@ -293,7 +329,7 @@ const canonical = new URL('/cv', Astro.site).href;
   }
   @page {
     size: letter;
-    margin: 0.5in;
+    margin: 0.38in 0.5in;
   }
   @media print {
     body {
@@ -312,15 +348,48 @@ const canonical = new URL('/cv', Astro.site).href;
       color: inherit;
       text-decoration: none;
     }
-    /* Dos páginas: un poco menos de aire entre bloques, sin achicar el texto. */
-    section {
-      margin-top: 12px;
+    /* Una página: texto de 9,5 pt (legible en papel) y menos aire entre bloques. */
+    body {
+      font-size: 9.5pt;
+      line-height: 1.28;
     }
-    .role {
+    h1 {
+      font-size: 19pt;
+    }
+    .headline {
+      margin-top: 2px;
+    }
+    .contact {
       margin-top: 6px;
     }
-    li {
+    ul {
       margin-top: 2px;
+    }
+    .headline,
+    h2 {
+      font-size: 10.5pt;
+    }
+    h3 {
+      font-size: 9.5pt;
+    }
+    .contact,
+    .dates {
+      font-size: 8.5pt;
+    }
+    section {
+      margin-top: 7px;
+    }
+    h2 {
+      margin-bottom: 3px;
+    }
+    .role {
+      margin-top: 4px;
+    }
+    li {
+      margin-top: 0;
+    }
+    .skills {
+      gap: 1px 10px;
     }
     /* Un título nunca queda solo al pie de una página, ni una sección corta partida en dos. */
     h2 {

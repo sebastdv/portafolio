@@ -109,6 +109,13 @@ export const profile = {
     'Integro la IA en todo mi flujo de trabajo, desde el diseño hasta las pruebas. Uso agentes de código para entender sistemas existentes, implementar, auditar y probar, y me quedo con lo que se puede verificar. Lo que busco en cada proyecto es lo mismo: automatizar procesos y añadir valor directo al usuario final.',
   ],
 
+  /** Perfil de un solo párrafo para la hoja de vida, que debe caber en una página. */
+  cvAbout:
+    'Tecnólogo en Desarrollo de Sistemas Informáticos y estudiante de Ingeniería de Sistemas (7.º semestre), con un año como desarrollador full-stack en sistemas de negocio para varios clientes. Integro la IA en todo mi flujo de trabajo, del diseño a las pruebas, para construir soluciones que automatizan procesos y añaden valor directo al usuario final.',
+
+  /** Proyectos personales que van en la hoja de vida, además de citara. El resto se enlaza al portafolio. */
+  cvProjects: ['turno', 'fuentes'],
+
   experience: [
     {
       title: 'Desarrollador Junior',
@@ -121,7 +128,7 @@ export const profile = {
         {
           title: 'Plataforma de atención por WhatsApp',
           description:
-            'Diseñé y construí el servicio que conecta el sistema con la API oficial de WhatsApp, incluido el alta de números y la medición de consumo.',
+            'Diseñé y construí el servicio que conecta el sistema con la WhatsApp Cloud API, con alta de números y medición de consumo.',
           usage: 'En uso por 2 empresas cliente',
           stack: ['Node.js', 'NestJS', 'WhatsApp Cloud API'],
           wide: true,
@@ -129,7 +136,7 @@ export const profile = {
         {
           title: 'Chatbots configurables',
           description:
-            'Motor de flujos adaptable, con traspaso a un agente humano, formularios integrados y bandeja de chats.',
+            'Desarrollé un motor de flujos adaptable, con traspaso a un agente humano, formularios integrados y bandeja de chats.',
           usage: 'En uso por 2 empresas cliente',
           stack: ['PHP', 'Laravel', 'Vue', 'Inertia', 'PostgreSQL', 'Redis'],
         },
@@ -142,21 +149,21 @@ export const profile = {
         {
           title: 'Portal web de solicitudes de crédito',
           description:
-            'Conectado paso a paso con el ERP, con lectura automática de documentos mediante Azure AI Document Intelligence (configuración e integración propias).',
+            'Integré el portal paso a paso con el ERP y con la lectura automática de documentos de Azure AI Document Intelligence (configuración e integración propias).',
           usage: 'En uso por una entidad financiera',
           stack: ['Azure AI Document Intelligence'],
         },
         {
           title: 'ERP contable',
           description:
-            'Módulos de reportes de impuestos y cartera, conciliación contable y APIs para otros sistemas.',
+            'Desarrollé módulos de reportes de impuestos y cartera, conciliación contable y APIs para otros sistemas.',
           usage: 'Usado por 3 empresas cliente',
           stack: ['PHP', 'Laravel', 'PostgreSQL'],
         },
         {
           title: 'Desarrollo web',
           description:
-            'Sitios corporativos y landing pages para varias empresas, con un CMS para que cada cliente edite su contenido.',
+            'Construí sitios corporativos y landing pages para varias empresas, con un CMS para que cada cliente edite su contenido sin depender de desarrollo.',
           stack: ['Next.js', 'Vue', 'Tailwind CSS', 'Payload CMS'],
           wide: true,
         },
