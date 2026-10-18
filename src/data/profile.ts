@@ -257,6 +257,20 @@ export const profile = {
       repo: { label: 'github.com/sebastdv/nitido', href: 'https://github.com/sebastdv/nitido' },
     },
     {
+      name: 'turno',
+      summary:
+        'Reservas en línea para una barbería, con abono pagado por Wompi: los clientes eligen servicio, barbero y hora, y la barbería maneja su agenda desde un panel.',
+      status: 'Proyecto personal, listo para publicar',
+      highlights: [
+        'Cero reservas dobles garantizadas por PostgreSQL con una restricción de exclusión, aun con dos personas confirmando el mismo horario a la vez.',
+        'Pagos con Wompi: firma de integridad, eventos verificados e idempotentes, y el caso del pago que llega cuando el horario ya se ocupó.',
+        'Cuentas propias con scrypt, sesiones guardadas como hash y bloqueo por intentos fallidos.',
+        'Panel con agenda por barbero, horarios por tramos, bloqueos y abonos por devolver; 43 pruebas contra Postgres real.',
+      ],
+      stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Wompi', 'Tailwind CSS', 'Vitest'],
+      repo: { label: 'github.com/sebastdv/turno', href: 'https://github.com/sebastdv/turno' },
+    },
+    {
       name: 'fuentes',
       summary:
         'Búsqueda con IA sobre tus propios documentos (PDF, Markdown, páginas web): cada respuesta cita la frase exacta de donde sale y la resalta en su fuente.',
