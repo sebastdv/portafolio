@@ -224,7 +224,7 @@ export const profile = {
     },
   },
 
-  // `as` deja disponible el campo opcional `demo` aunque ningún proyecto lo use todavía.
+  // `as` conserva el campo opcional `demo` en el tipo de cada proyecto.
   projects: (
     [
     {
@@ -241,6 +241,7 @@ export const profile = {
       ],
       stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Tailwind CSS', 'Vitest'],
       repo: { label: 'github.com/sebastdv/corto', href: 'https://github.com/sebastdv/corto' },
+      demo: { label: 'Ver demo', href: 'https://cortooo.vercel.app' },
     },
     {
       name: 'nitido',
@@ -255,6 +256,7 @@ export const profile = {
       ],
       stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vitest'],
       repo: { label: 'github.com/sebastdv/nitido', href: 'https://github.com/sebastdv/nitido' },
+      demo: { label: 'Ver demo', href: 'https://nitidooo.vercel.app' },
     },
     {
       name: 'turno',
@@ -269,6 +271,7 @@ export const profile = {
       ],
       stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Wompi', 'Tailwind CSS', 'Vitest'],
       repo: { label: 'github.com/sebastdv/turno', href: 'https://github.com/sebastdv/turno' },
+      demo: { label: 'Ver demo (pagos simulados)', href: 'https://turno-ochre.vercel.app' },
     },
     {
       name: 'fuentes',
@@ -297,6 +300,7 @@ export const profile = {
       ],
       stack: ['Node.js', 'React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vitest'],
       repo: { label: 'github.com/sebastdv/bitacora', href: 'https://github.com/sebastdv/bitacora' },
+      demo: { label: 'Ver demo (datos de ejemplo)', href: 'https://bitacoraaa.vercel.app' },
     },
     {
       name: 'lockline',
