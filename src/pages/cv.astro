@@ -312,5 +312,23 @@ const canonical = new URL('/cv', Astro.site).href;
       color: inherit;
       text-decoration: none;
     }
+    /* Dos páginas: un poco menos de aire entre bloques, sin achicar el texto. */
+    section {
+      margin-top: 12px;
+    }
+    .role {
+      margin-top: 6px;
+    }
+    li {
+      margin-top: 2px;
+    }
+    /* Un título nunca queda solo al pie de una página, ni una sección corta partida en dos. */
+    h2 {
+      break-after: avoid;
+    }
+    section:has(.skills),
+    section:last-of-type {
+      break-inside: avoid;
+    }
   }
 </style>

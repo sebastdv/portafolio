@@ -131,7 +131,7 @@ export const profile = {
           description:
             'Motor de flujos adaptable, con traspaso a un agente humano, formularios integrados y bandeja de chats.',
           usage: 'En uso por 2 empresas cliente',
-          stack: ['PHP', 'Laravel', 'PostgreSQL', 'Redis'],
+          stack: ['PHP', 'Laravel', 'Vue', 'Inertia', 'PostgreSQL', 'Redis'],
         },
         {
           title: 'Auditoría con IA',
@@ -302,14 +302,14 @@ export const profile = {
       name: 'lockline',
       summary:
         'Herramienta de línea de comandos que revisa migraciones de PostgreSQL antes de producción: dice qué tabla bloquea cada sentencia y propone la alternativa segura.',
-      status: 'Proyecto personal, versión inicial',
+      status: 'Proyecto personal, versión 0.1',
       highlights: [
         'Lee el SQL con el parser oficial de PostgreSQL y explica el lock de cada sentencia.',
         '21 reglas para patrones peligrosos, como índices sin CONCURRENTLY o columnas que reescriben la tabla.',
         'Cada lock que afirma está verificado contra PostgreSQL 14, 15, 16 y 17 reales.',
-        'Salida para personas o en JSON, configuración por proyecto y supresiones con motivo.',
+        'Lee la salida de php artisan migrate --pretend y anota los pull requests con una GitHub Action propia (y SARIF para code scanning).',
       ],
-      stack: ['Rust', 'PostgreSQL', 'Docker', 'GitHub Actions'],
+      stack: ['Rust', 'PostgreSQL', 'Laravel', 'GitHub Actions', 'Docker'],
       repo: { label: 'github.com/sebastdv/lockline', href: 'https://github.com/sebastdv/lockline' },
     },
     ] satisfies PersonalProject[]
